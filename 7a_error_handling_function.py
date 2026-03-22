@@ -1,7 +1,8 @@
 import requests
 
 def emotion_detector(text):
-    if text == "" or text is None:
+    # Gestion du cas input vide (400)
+    if text is None or text.strip() == "":
         return {
             "anger": None,
             "disgust": None,
@@ -23,6 +24,7 @@ def emotion_detector(text):
 
         response = requests.post(url, json=data, headers=headers, timeout=5)
 
+        # Gestion status code 400 venant de l’API
         if response.status_code == 400:
             return {
                 "anger": None,
@@ -50,6 +52,7 @@ def emotion_detector(text):
         }
 
     except Exception:
+        # fallback sécurisé
         return {
             "anger": None,
             "disgust": None,
