@@ -39,7 +39,7 @@ def emotion_detector(text):
         }
 
     except Exception:
-        # 🔥 FALLBACK LOCAL POUR PASSER LES TESTS
+        # Fallback local pour tests
         text_lower = text.lower()
 
         if "happy" in text_lower:
@@ -58,8 +58,4 @@ def emotion_detector(text):
             "joy": 0.9 if dominant == "joy" else 0.0,
             "sadness": 0.9 if dominant == "sadness" else 0.0,
             "dominant_emotion": dominant
-<<<<<<< HEAD
         }
-=======
-        }
->>>>>>> 058ee90 (Final project submission with all fixes)
