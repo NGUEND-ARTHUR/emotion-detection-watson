@@ -3,10 +3,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
 Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
 
-Loading personal and system profiles took 3875ms.
+Loading personal and system profiles took 4264ms.
 (base) PS C:\Users\Nguend Arthur Johann\Desktop\mcino-Introduction-to-Git-and-GitHub> python test_emotion_detection.py
-...
+....
 ----------------------------------------------------------------------
-Ran 3 tests in 20.396s
+Ran 4 tests in 30.580s
 
 OK
