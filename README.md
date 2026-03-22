@@ -1,6 +1,5 @@
 # Final Project
-
-## Emotion Detection Application
+Emotion Detection Application using Watson AI
 
 This project is a simple **Emotion Detection Web Application** built using:
 
