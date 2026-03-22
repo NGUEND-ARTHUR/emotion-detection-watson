@@ -1,23 +1,21 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
-@app.route("/emotionDetector")
-def emotion_detector_route():
-    text = request.args.get('text')
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-    # Gestion input vide
+@app.route("/emotionDetector", methods=["POST"])
+def emotion_detector_route():
+    text = request.form.get("text")
+
     if text is None or text.strip() == "":
-        return "Invalid input! Try again."
+        return render_template("index.html", error="Invalid input")
 
     result = emotion_detector(text)
 
-    # Si erreur (ex: API)
-    if "error" in result:
-        return "Invalid input! Try again."
-
-    # Format EXACT attendu
     response = (
         f"For the given statement, the system response is "
         f"'anger': {result['anger']}, "
@@ -28,8 +26,8 @@ def emotion_detector_route():
         f"The dominant emotion is {result['dominant_emotion']}."
     )
 
-    return response
+    return render_template("index.html", result=response)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5000)
