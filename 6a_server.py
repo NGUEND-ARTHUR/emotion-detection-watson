@@ -7,26 +7,17 @@ app = Flask(__name__)
 def emotion_detector_route():
     text = request.args.get('text')
 
-<<<<<<< HEAD
     # Gestion input vide
-=======
->>>>>>> 058ee90 (Final project submission with all fixes)
     if text is None or text.strip() == "":
         return "Invalid input! Try again."
 
     result = emotion_detector(text)
 
-<<<<<<< HEAD
     # Si erreur (ex: API)
     if "error" in result:
         return "Invalid input! Try again."
 
-    # Format EXACT attendu par IBM
-=======
-    if "error" in result:
-        return "Invalid input! Try again."
-
->>>>>>> 058ee90 (Final project submission with all fixes)
+    # Format EXACT attendu
     response = (
         f"For the given statement, the system response is "
         f"'anger': {result['anger']}, "
