@@ -1,7 +1,10 @@
 import requests
 
 def emotion_detector(text):
+<<<<<<< HEAD
     # Gestion du cas input vide (400)
+=======
+>>>>>>> 058ee90 (Final project submission with all fixes)
     if text is None or text.strip() == "":
         return {
             "anger": None,
