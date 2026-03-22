@@ -1,41 +1,41 @@
-from flask import Flask, request, jsonify
+"""
+Flask server for emotion detection with improved code quality.
+"""
+
+from flask import Flask, request
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
 
-def analyze_code_style(text):
-    if text is None:
-        return "Invalid input: None"
+@app.route("/emotionDetector")
+def emotion_detector_route():
+    """Handle emotion detection requests."""
 
-    if not isinstance(text, str):
-        return "Invalid input type"
-
-    if len(text.strip()) == 0:
-        return "Empty input detected"
-
-    return "Code analysis passed"
-
-
-@app.route("/emotion")
-def emotion():
     text = request.args.get("text")
 
-    analysis_result = analyze_code_style(text)
-
-    if analysis_result != "Code analysis passed":
-        return jsonify({
-            "error": "400 Bad Request",
-            "message": analysis_result
-        }), 400
+    # Handle empty input
+    if not text or text.strip() == "":
+        return "Invalid input! Try again."
 
     result = emotion_detector(text)
 
-    return jsonify({
-        "analysis": analysis_result,
-        "result": result
-    })
+    # Handle errors from emotion function
+    if "error" in result:
+        return "Invalid input! Try again."
+
+    response = (
+        f"For the given statement, the system response is "
+        f"'anger': {result['anger']}, "
+        f"'disgust': {result['disgust']}, "
+        f"'fear': {result['fear']}, "
+        f"'joy': {result['joy']} and "
+        f"'sadness': {result['sadness']}. "
+        f"The dominant emotion is {result['dominant_emotion']}."
+    )
+
+    return response
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5001)
